@@ -1,4 +1,4 @@
-Want to see this page in english? [Click Here]("https://github.com/brenoriios/seega-on-lan/blob/main/README-EN.md")
+Want to see this page in english? [Click Here](https://github.com/brenoriios/seega-on-lan/blob/main/README-EN.md)
 
 # **O que é Seega?**
 
