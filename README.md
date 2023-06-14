@@ -1,18 +1,4 @@
-<style>
-    .language-message {
-        padding: 10px;
-        border: 1px solid lightgray;
-        border-radius: 10px;
-        color: white;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-</style>
-
-<div class="language-message">
-    Want to see this page in english?
-    <a href="https://github.com/brenoriios/seega-on-lan/blob/main/README-EN.md">Click Here</a>
-</div>
+Want to see this page in english? [Click Here]("https://github.com/brenoriios/seega-on-lan/blob/main/README-EN.md")
 
 # **O que é Seega?**
 
