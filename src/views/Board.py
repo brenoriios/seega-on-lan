@@ -25,13 +25,19 @@ class Board:
 
             if from_server["type"] == "command":
                 if from_server["head"] == "show_greetings_message":
-                    self.widgets["status"]["label"].config(text=from_server["body"])
+                    message = from_server["body"]
+                    self.widgets["status"]["label"].config(text=message[0])
+                    self.widgets["bottom_status"]["label"].pack()
+                    self.widgets["bottom_status"]["label"].config(text=message[1])
                     self.widgets["connect"]["frame"].pack_forget()
+
+                if from_server["head"] == "countdown_start_game":
+                    self.widgets["status"]["label"].config(text=from_server["body"])
 
                 if from_server["head"] == "start_game":
                     board_data = from_server["body"]
                     self.re_draw(board_data[0], board_data[1])
-                    self.widgets["board"]["frame"].pack()
+                    self.widgets["board"]["frame"].pack()                    
 
                 if from_server["head"] == "highlight_cell_move_options":
                     valid_move_options = from_server["body"]
@@ -89,10 +95,11 @@ class Board:
         status_bar = tk.Frame(self.root)
         game_board = tk.Frame(self.root)
         connect_bar = tk.Frame(self.root)
+        bottom_status_bar = tk.Frame(self.root)
 
         status_label = tk.Label(
             status_bar,
-            text=f"Aguardando jogadores...",
+            text="Aguardando jogadores...",
             pady=10,
             font=("Arial", 15),
         )
@@ -128,9 +135,18 @@ class Board:
         )
         connect_button.pack()
 
+        bottom_status_label = tk.Label(
+            status_bar,
+            text="",
+            pady=10,
+            font=("Arial", 15),
+        )
+
         self.widgets["status"] = {"frame": status_bar, "label": status_label}
         self.widgets["board"] = {"frame": game_board}
         self.widgets["connect"] = {"frame": connect_bar, "button": connect_button}
+        self.widgets["bottom_status"] = {"frame": bottom_status_bar, "label": bottom_status_label}
 
         status_bar.pack()
         connect_bar.pack()
+        bottom_status_bar.pack()

@@ -2,6 +2,7 @@ import socket
 import random
 import json
 import threading
+import time
 
 from src.settings import settings
 from src.models.Seega import Seega
@@ -67,7 +68,7 @@ while len(players) < 2:
     player_piece = new_player.piece["name"]
     greetings_message = make_command(
         "show_greetings_message",
-        f"Bem Vindo(a)!\n Você está jogando com {player_piece}",
+        ["Bem Vindo(a)!", f"Você está jogando com {player_piece}"]
     )
     client_socket.sendall(greetings_message)
 
@@ -75,6 +76,12 @@ game_instance.start_game(players)
 
 threading._start_new_thread(handle_message, (game_instance.current_player.socket, "m"))
 threading._start_new_thread(handle_message, (game_instance.opponent.socket, "m"))
+
+for count in range(3, 0, -1):
+    command = make_command("countdown_start_game", f"O jogo vai começar em \n {count} \n segundo(s)!")
+    game_instance.current_player.socket.sendall(command)
+    game_instance.opponent.socket.sendall(command)
+    time.sleep(1)
 
 start_game_current_player = make_command("start_game", ["Você Começa!", game_instance.board])
 start_game_opponent = make_command("start_game", ["Seu adversário começa", game_instance.board])
