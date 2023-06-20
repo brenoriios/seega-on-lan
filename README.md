@@ -60,17 +60,18 @@ Logo após iniciar a execução do servidor:
 1. O servidor instancia um socket
 1. O servidor atribui um endereço e porta ao socket
 1. O servidor espera por conexões
-1. O servidor recebe uma conexão ele
+1. O servidor recebe uma conexão
+1. O servidor aceita a conexão
 1. O servidor adiciona o cliente na lista de jogadores
 1. O servidor atribui ao novo jogador um conjunto de peças
 1. O servidor envia um comando com a mensagem de boas vindas ao novo jogador
     > Comando: [show_greetings_message](#show_greetings_message)
-1. O servidor repete os passos 1-5 enquanto existirem menos do que 2 jogadores
+1. O servidor repete os passos 3-8 enquanto existirem menos do que 2 jogadores
 1. O servidor inicializa um jogo: Atribui os jogadores a uma instancia do jogo e define o primeiro jogador
 1. O servidor inicia um novo thread e fica "ouvindo" as mensagens enviadas pelo jogador 1
-    > Lista de [comandos recebidos pelo servidor](#comandos-que-o-servidor-recebe)
+    > Veja: lista de [comandos recebidos pelo servidor](#comandos-que-o-servidor-recebe)
 1. O servidor inicia um novo thread e fica "ouvindo" as mensagens enviadas pelo jogador 2
-    > Lista de [comandos recebidos pelo servidor](#comandos-que-o-servidor-recebe)
+    > Veja: lista de [comandos recebidos pelo servidor](#comandos-que-o-servidor-recebe)
 1. O servidor envia o comando para iniciar o jogo para o jogador atual
     > Comando: [start_game](#start_game)
 1. O servidor envia o comando para iniciar o jogo para o próximo jogador
@@ -81,11 +82,11 @@ Logo após iniciar a execução do servidor:
 Logo após iniciar a execução do cliente:
 
 1. O cliente instancia um socket
-1. O cliente instancia e mostra a [tela de conexão]()
+1. O cliente instancia e mostra a [tela de conexão](#tela-de-conexão)
 1. O cliente aguarda o usuário clicar em conectar
 1. O cliente se conecta ao servidor
 1. O cliente inicia um novo thread e fica "ouvindo" as mensagens enviadas pelo servidor
-    > Lista de [comandos recebidos pelo cliente](#comandos-que-o-cliente-recebe)
+    > Veja: lista de [comandos recebidos pelo cliente](#comandos-que-o-cliente-recebe)
 1. O cliente espera um clique na interface para enviar o comando de fazer jogada para o servidor
     > Comando: [make_play](#make_play)
 
@@ -101,13 +102,13 @@ Comando para fazer uma jogada, recebe uma linha e uma coluna
 >
 > Na primeira vez define **de onde** a peça do jogador vai se mover e então o servidor envia o [comando para destacar as jogadas possíveis](#highlight_cell_move_options)
 >
-> Na segunda vez define **para onde** a peça do jogador vai se mover e então o servidor envia o [comando para atualizar o tabuleiro](#re_draw)
+> Na segunda vez define **para onde** a peça do jogador vai se mover e então o servidor envia o [comando para atualizar o tabuleiro](#re_draw) se for um movimento válido
 
 ``` JSON
 {
     "type": "command",
     "head": "make_play",
-    "body": [ linha, coluna ]
+    "body": [ row, column ]
 }
 ```
 
@@ -131,32 +132,21 @@ Comando que atualiza a interface com a mensagem de boas vindas
 
 Comando para iniciar o jogo, envia como dados se é a vez do jogador ou não e as informações do tabuleiro que nesse primeiro momento está vazio.
 
-Para o jogador atual:
-
 ``` JSON
 {
     "type": "command",
     "head": "start_game",
     "body": [
-        "Sua Vez",
-        board_info
-    ]
-}
-```
-
-Para o próximo jogador:
-
-``` JSON
-{
-    "type": "command",
-    "head": "start_game",
-    "body": [
-        "Vez do Adversário",
+        current_player_message,
         board_info
     ]
 }
 ```
 > board_info &rarr; Matriz que representa o tabuleiro
+
+Para o próximo jogador: `current_player_message = "Sua Vez"`
+
+Para o jogador atual: `current_player_message = "Vez do Adversário"`
 
 ## highlight_cell_move_options
 
@@ -172,7 +162,7 @@ Comando que atualiza o tabuleiro com as jogadas possíveis para uma peça seleci
 }
 ```
 
-> move_options &rarr; Lista de posições (linha, coluna) válidas para uma posição (linha, coluna)
+> move_options &rarr; Lista de posições (linha, coluna) válidas para uma determinada posição (linha, coluna)
 
 ## re_draw
 
@@ -185,26 +175,16 @@ Para o jogador atual:
     "type": "command",
     "head": "re_draw",
     "body": [
-        "Sua Vez",
+        current_player_message,
         board_info
     ]
 }
 ```
-
-Para o próximo jogador:
-
-``` JSON
-{
-    "type": "command",
-    "head": "re_draw",
-    "body": [
-        "Vez do Adversário",
-        board_info
-    ]
-}
-```
-
 > board_info &rarr; Matriz que representa o tabuleiro
+
+Para o próximo jogador: `current_player_message = "Sua Vez"`
+
+Para o jogador atual: `current_player_message = "Vez do Adversário"`
 
 ## end_game
 
@@ -229,3 +209,27 @@ Para o próximo jogador:
     "body": "O Adversário Venceu..."
 }
 ```
+
+# **Telas**
+
+## Tela de Conexão
+<img src="readme-src/connection-screen.png" alt="Tela de Conexão" width="300" />
+
+## Tela de Boas Vindas
+<img src="readme-src/greetings-screen.png" alt="Tela de Boas Vindas" width="300" />
+
+## Tela de Jogo (Fase de Posicionamento)
+
+### Primeiro a Jogar
+<img src="readme-src/game-screen-placing-stage-current-player.png" alt="Tela de Jogo - Fase de Posicionamento - Primeiro a Jogar" width="300" />
+
+### Segundo a Jogar
+<img src="readme-src/game-screen-placing-stage-opponent.png" alt="Tela de Jogo - Fase de Posicionamento - Segundo a Jogar" width="300" />
+
+## Tela de Jogo (Fase de Jogo)
+
+### Jogador da Vez
+<img src="readme-src/game-screen-playing-stage-current-player.png" alt="Tela de Jogo - Fase de Jogo - Jogador da Vez" width="300" />
+
+### Próximo Jogador
+<img src="readme-src/game-screen-playing-stage-opponent.png" alt="Tela de Jogo - Fase de Jogo - Próximo Jogador" width="300" />
