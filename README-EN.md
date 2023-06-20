@@ -74,6 +74,12 @@ Right after starting the server execution:
      > See: list of [commands received by the server](#commands-the-server-receives)
 1. The server starts a new thread and start "listening" to messages sent by player 2
      > See: list of [commands received by the server](#commands-the-server-receives)
+1. Server sends command to player 1 updates interface with game start count
+      > Command: [countdown_start_game](#countdown_start_game)
+1. Server sends command to player 2 updates interface with game start count
+      > Command: [countdown_start_game](#countdown_start_game)
+1. Server updates count and waits one second
+1. The server repeats steps 13-15 three times
 1. The server sends the command to start the game to the current player
      > Command: [start_game](#start_game)
 1. The server sends the command to start the game to the next player
@@ -124,11 +130,30 @@ Command that updates the interface with the welcome message
 {
     "type": "command",
     "head": "show_greetings_message",
-    "body": "Bem Vindo(a)!\n Você está jogando com {player_piece}"
+    "body": [
+        "Bem Vindo(a)!",
+        f"Você está jogando com {player_piece}"
+    ]
 }
 ```
 
 > player_piece &rarr; Player piece color
+
+## countdown_start_game
+
+Command that updates the interface with the time left before the game starts
+
+``` JSON
+{
+    "type": "command",
+    "head": "countdown_start_game",
+    "body": [
+        "O jogo vai começar em \n {count} \n segundo(s)!"
+    ]
+}
+```
+
+> count &rarr; Time left before game start
 
 ## start_game
 

@@ -72,6 +72,12 @@ Logo após iniciar a execução do servidor:
     > Veja: lista de [comandos recebidos pelo servidor](#comandos-que-o-servidor-recebe)
 1. O servidor inicia um novo thread e fica "ouvindo" as mensagens enviadas pelo jogador 2
     > Veja: lista de [comandos recebidos pelo servidor](#comandos-que-o-servidor-recebe)
+1. O servidor envia o comando para o jogador 1 atualizar a interface com a contagem para início do jogo
+    > Comando: [countdown_start_game](#countdown_start_game)
+1. O servidor envia o comando para o jogador 2 atualizar a interface com a contagem para início do jogo
+    > Comando: [countdown_start_game](#countdown_start_game)
+1. O servidor atualiza a contagem e espera um segundo
+1. O servidor repete os passos 13-15 três vezes
 1. O servidor envia o comando para iniciar o jogo para o jogador atual
     > Comando: [start_game](#start_game)
 1. O servidor envia o comando para iniciar o jogo para o próximo jogador
@@ -122,11 +128,30 @@ Comando que atualiza a interface com a mensagem de boas vindas
 {
     "type": "command",
     "head": "show_greetings_message",
-    "body": "Bem Vindo(a)!\n Você está jogando com {player_piece}"
+    "body": [
+        "Bem Vindo(a)!",
+        f"Você está jogando com {player_piece}"
+    ]
 }
 ```
 
 > player_piece &rarr; Cor da peça do jogador
+
+## countdown_start_game
+
+Comando que atualiza a interface com a contagem para o início do jogo
+
+``` JSON
+{
+    "type": "command",
+    "head": "countdown_start_game",
+    "body": [
+        "O jogo vai começar em \n {count} \n segundo(s)!"
+    ]
+}
+```
+
+> count &rarr; Contagem restante
 
 ## start_game
 
