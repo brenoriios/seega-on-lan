@@ -37,7 +37,7 @@ class Board:
                 if from_server["head"] == "start_game":
                     board_data = from_server["body"]
                     self.re_draw(board_data[0], board_data[1])
-                    self.widgets["board"]["frame"].pack()                    
+                    self.widgets["board"]["frame"].pack()
 
                 if from_server["head"] == "highlight_cell_move_options":
                     valid_move_options = from_server["body"]
@@ -93,8 +93,9 @@ class Board:
 
     def draw_board(self):
         status_bar = tk.Frame(self.root)
-        game_board = tk.Frame(self.root)
-        connect_bar = tk.Frame(self.root)
+        game_board_frame = tk.Frame(self.root)
+        game_board = tk.Frame(game_board_frame)
+        connect_bar = tk.Frame(status_bar)
         bottom_status_bar = tk.Frame(self.root)
 
         status_label = tk.Label(
@@ -134,9 +135,10 @@ class Board:
             lambda event, button=connect_button: self.connect_to_server(),
         )
         connect_button.pack()
+        connect_bar.pack()
 
         bottom_status_label = tk.Label(
-            status_bar,
+            bottom_status_bar,
             text="",
             pady=10,
             font=("Arial", 15),
@@ -147,6 +149,10 @@ class Board:
         self.widgets["connect"] = {"frame": connect_bar, "button": connect_button}
         self.widgets["bottom_status"] = {"frame": bottom_status_bar, "label": bottom_status_label}
 
-        status_bar.pack()
-        connect_bar.pack()
-        bottom_status_bar.pack()
+        # status_bar.pack()
+        # connect_bar.pack()
+        # bottom_status_bar.pack()
+        
+        status_bar.grid(row = 0)
+        game_board_frame.grid(row = 1)
+        bottom_status_bar.grid(row = 2)

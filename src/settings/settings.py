@@ -1,3 +1,5 @@
+import random
+
 # HOST = "192.168.1.9"
 HOST = "localhost"
 PORT = 11523
@@ -28,6 +30,8 @@ PIECES = [
         "image_resource": "src/images/blue_piece.png",
     },
 ]
+
+random.shuffle(PIECES)
 
 RED_PIECE = "Vermelhas"
 BLUE_PIECE = "Azuis"

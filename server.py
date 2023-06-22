@@ -63,7 +63,7 @@ game_instance = Seega()
 
 while len(players) < 2:
     client_socket, client_address = server_socket.accept()
-    new_player = Player(client_address, client_socket, random.choice(settings.PIECES))
+    new_player = Player(client_address, client_socket, settings.PIECES.pop())
     players.append(new_player)
     player_piece = new_player.piece["name"]
     greetings_message = make_command(
