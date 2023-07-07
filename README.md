@@ -6,7 +6,7 @@ Seega é um jogo de tabuleiro para dois jogadores.
 
 Nesse jogo cada jogador assume o controle das peças de uma cor e tem como objetivo capturar todas as peças do seu adversário.
 
-Uma peça do adversário pode ser capturada cercando-a com as suas e o jogo acaba quando restar apenas uma peça do adversário no tabuleiro.
+Uma peça do adversário pode ser capturada cercando-a com as suas e o jogo acaba quando não restar nenhuma peça do adversário no tabuleiro.
 
 # **Qual o objetivo desse projeto?**
 

@@ -8,7 +8,7 @@ Seega is a board game for two players.
 
 In this game, each player takes control of pieces of one color and aims to capture all of his opponent's pieces.
 
-An opponent's piece can be captured by surrounding it with yours and the game ends when only one opponent's piece remains on the board.
+An opponent's piece can be captured by surrounding it with yours and the game ends when there are no opponent's pieces left on the board.
 
 # **What is the purpose of this project?**
 
