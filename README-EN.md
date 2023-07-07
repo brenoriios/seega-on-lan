@@ -244,6 +244,9 @@ For the next player:
 ## Greetings Screen
 <img src="readme-src/greetings-screen.png" alt="Greetings Screen" width="300" />
 
+## Countdown Screen
+<img src="readme-src/countdown-screen.png" alt="Countdown Screen" width="300" />
+
 ## Game Screen (Placement Phase)
 
 ### First to Play
@@ -259,3 +262,8 @@ For the next player:
 
 ### Next Player
 <img src="readme-src/game-screen-playing-stage-opponent.png" alt="Playing Screen - Playing Stage - Next Player" width="300" />
+
+## Tela de Fim de Jogo (Vencedor)
+<img src="readme-src/winner-screen-red.png" alt="End Game Screen - Red" width="300" />
+
+<img src="readme-src/winner-screen-blue.png" alt="End Game Screen - Blue" width="300" />

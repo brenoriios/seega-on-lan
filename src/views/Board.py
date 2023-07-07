@@ -147,12 +147,15 @@ class Board:
         self.widgets["status"] = {"frame": status_bar, "label": status_label}
         self.widgets["board"] = {"frame": game_board}
         self.widgets["connect"] = {"frame": connect_bar, "button": connect_button}
-        self.widgets["bottom_status"] = {"frame": bottom_status_bar, "label": bottom_status_label}
+        self.widgets["bottom_status"] = {
+            "frame": bottom_status_bar,
+            "label": bottom_status_label,
+        }
 
         # status_bar.pack()
         # connect_bar.pack()
         # bottom_status_bar.pack()
-        
-        status_bar.grid(row = 0)
-        game_board_frame.grid(row = 1)
-        bottom_status_bar.grid(row = 2)
+
+        status_bar.grid(row=0)
+        game_board_frame.grid(row=1)
+        bottom_status_bar.grid(row=2)

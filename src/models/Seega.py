@@ -89,6 +89,14 @@ class Seega:
             return True
         return False
 
+    def excessive_move(self, row, column):
+        if (abs(int(self.from_row) - int(row)) > 1) or (
+            abs(int(self.from_column) - int(column)) > 1
+        ):
+            return True
+
+        return False
+
     def is_invalid(self, row, column):
         if row < 0 or row >= settings.BOARD_SIZE:
             return True
@@ -231,7 +239,11 @@ class Seega:
             return True
 
         if self.to_is_not_set:
-            if self.is_invalid(row, column) or self.is_full(row, column):
+            if (
+                self.is_invalid(row, column)
+                or self.excessive_move(row, column)
+                or self.is_full(row, column)
+            ):
                 self.from_is_not_set = True
                 return False
 

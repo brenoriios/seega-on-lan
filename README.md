@@ -243,6 +243,9 @@ Para o próximo jogador:
 ## Tela de Boas Vindas
 <img src="readme-src/greetings-screen.png" alt="Tela de Boas Vindas" width="300" />
 
+## Tela de Contagem Regressiva
+<img src="readme-src/countdown-screen.png" alt="Tela de Contagem Regressiva" width="300" />
+
 ## Tela de Jogo (Fase de Posicionamento)
 
 ### Primeiro a Jogar
@@ -258,3 +261,8 @@ Para o próximo jogador:
 
 ### Próximo Jogador
 <img src="readme-src/game-screen-playing-stage-opponent.png" alt="Tela de Jogo - Fase de Jogo - Próximo Jogador" width="300" />
+
+## Tela de Fim de Jogo (Vencedor)
+<img src="readme-src/winner-screen-red.png" alt="Tela de Fim de Jogo - Vermelhas" width="300" />
+
+<img src="readme-src/winner-screen-blue.png" alt="Tela de Fim de Jogo - Azuis" width="300" />
