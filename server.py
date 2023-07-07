@@ -14,7 +14,6 @@ def make_command(action, args):
 
 
 def make_play(row, column):
-    global winner
     game_instance.make_play(row, column)
 
     if not game_instance.from_is_not_set and game_instance.to_is_not_set:
@@ -99,7 +98,7 @@ start_game_opponent = make_command(
 game_instance.current_player.socket.sendall(start_game_current_player)
 game_instance.opponent.socket.sendall(start_game_opponent)
 
-winner = False
+playing = False
 
-while not winner:
+while not playing:
     pass
